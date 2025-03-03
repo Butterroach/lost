@@ -1,5 +1,7 @@
 <h1 align="center">Lost</h1>
 
+[![CodeQL](https://github.com/Butterroach/lost/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Butterroach/lost/actions/workflows/github-code-scanning/codeql) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 Lost is a lightweight Linux hosts manager made in Python and QT6.
 
 ## Features
