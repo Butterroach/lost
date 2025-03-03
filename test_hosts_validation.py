@@ -1,4 +1,4 @@
-import app
+from validateHosts import validateHostsFile
 import requests
 
 
@@ -12,7 +12,7 @@ def test_valid_hosts():
 192.168.1.10    example.com
 192.168.1.11    test.local
 10.0.0.2        example.org         #  comment
-127.0.0.1       myapp.local myapp
+127.0.0.1       mylocal myapp
 
 192.168.100.100 dev.mywebsite.com
 192.168.100.101 staging.mywebsite.com
@@ -23,7 +23,7 @@ def test_valid_hosts():
 0.0.0.0         blockedwebsite.com
 127.0.0.1       anotherexample.com
 """
-    assert app.validateHostsFile(HOSTS)
+    assert validateHostsFile(HOSTS)
 
 
 def test_invalid_ipv4_hosts():
@@ -31,7 +31,7 @@ def test_invalid_ipv4_hosts():
 256.255.255.255  localhost
 ::1              localhost
 """
-    assert not app.validateHostsFile(HOSTS)
+    assert not validateHostsFile(HOSTS)
 
 
 def test_invalid_ipv6_hosts():
@@ -39,19 +39,19 @@ def test_invalid_ipv6_hosts():
 127.0.0.1 localhost
 :1        localhost
 """
-    assert not app.validateHostsFile(HOSTS)
+    assert not validateHostsFile(HOSTS)
 
 
 def test_invalid_syntax():
     HOSTS = """
 google.com 0.0.0.0
 """
-    assert not app.validateHostsFile(HOSTS)
+    assert not validateHostsFile(HOSTS)
 
 
 def test_empty_hosts():
     HOSTS = ""
-    assert app.validateHostsFile(HOSTS)  # this should be valid!
+    assert validateHostsFile(HOSTS)  # this should be valid!
 
 
 def test_hagezi_ultimate_uncompressed_hosts():
@@ -59,7 +59,7 @@ def test_hagezi_ultimate_uncompressed_hosts():
     HOSTS = requests.get(
         "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/ultimate.txt"
     ).text  # this hosts file has over 700,000 entries 😵
-    assert app.validateHostsFile(HOSTS)  # should be valid
+    assert validateHostsFile(HOSTS)  # should be valid
 
 
 def test_hagezi_ultimate_compressed_hosts():
@@ -67,4 +67,4 @@ def test_hagezi_ultimate_compressed_hosts():
     HOSTS = requests.get(
         "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/ultimate-compressed.txt"
     ).text
-    assert app.validateHostsFile(HOSTS)  # should also be valid
+    assert validateHostsFile(HOSTS)  # should also be valid

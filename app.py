@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import ipaddress
 import os
 import platform
 import re
@@ -33,59 +32,11 @@ from PySide6.QtWidgets import (
     QMessageBox,
 )
 from PySide6.QtCore import Qt, QUrl, QStringListModel
-from urllib.parse import urlparse
 from typing import Optional
-
-
 from ui_form import Ui_App  # generate ui_form.py: pyside6-uic form.ui -o ui_form.py
+from validate_hosts import validateHostsFile
 
-# do NOT remove the above comment
-
-__version__ = "1.0.1"
-
-
-def isValidIP(ip):
-    try:
-        ipaddress.ip_address(ip)
-        return True
-    except ValueError:
-        return False
-
-
-def isValidHostname(hostname):
-    parsed = urlparse(f"//{hostname}")
-
-    if not parsed.hostname:
-        return False
-
-    if parsed.path or parsed.params or parsed.query or parsed.fragment:
-        return False
-
-    return parsed.hostname == hostname
-
-
-def validateHostsFile(data):
-    lines = data.splitlines()
-    for line in lines:
-        line = line.split("#")[0].strip()
-
-        if not line:
-            continue
-
-        parts = line.split()
-
-        if len(parts) < 2:
-            return False
-
-        ip = parts[0]
-        if not isValidIP(ip):
-            return False
-
-        for hostname in parts[1:]:
-            if not isValidHostname(hostname):
-                return False
-
-    return True
+__version__ = "1.1.0"
 
 
 class HtmlWindow(QDialog):
