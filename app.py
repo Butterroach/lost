@@ -41,11 +41,10 @@ from ui_form import Ui_App  # generate ui_form.py: pyside6-uic form.ui -o ui_for
 
 # do NOT remove the above comment
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 def isValidIP(ip):
-    ip = ip.split("#")[0].strip()
     try:
         ipaddress.ip_address(ip)
         return True
@@ -54,8 +53,6 @@ def isValidIP(ip):
 
 
 def isValidHostname(hostname):
-    hostname = hostname.split("#")[0].strip()
-
     parsed = urlparse(f"//{hostname}")
 
     if not parsed.hostname:
@@ -70,9 +67,9 @@ def isValidHostname(hostname):
 def validateHostsFile(data):
     lines = data.splitlines()
     for line in lines:
-        line = line.strip()
+        line = line.split("#")[0].strip()
 
-        if line.startswith("#") or not line:
+        if not line:
             continue
 
         parts = line.split()
