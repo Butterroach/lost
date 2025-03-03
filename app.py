@@ -225,7 +225,7 @@ class App(QMainWindow):
                         QMessageBox.critical(
                             self,
                             "Your internet is terrible",
-                            f"The update for {url} timed out! Please check your internet connection and try again.",
+                            f"The update for {url} timed out! Please check your internet connection. Update will proceed with the other sources...",
                         )
                     return
                 if contents.strip().replace("\n", "").replace("\r", "") == self.losts[
