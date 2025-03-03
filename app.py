@@ -63,11 +63,10 @@ class HtmlWindow(QDialog):
                 "sudo",
                 "-u",
                 os.getlogin(),  # this will NOT return root, it will return the actual human user (source: believe me)
-                "python3",
-                "-c",
-                f"__import__('webbrowser').open('{link}')",
+                "xdg-open",
+                link,
             ]
-        )  # very hacky lol but it works soooo
+        )
 
 
 class App(QMainWindow):
