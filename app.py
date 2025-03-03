@@ -34,7 +34,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, QUrl, QStringListModel
 from typing import Optional
 from ui_form import Ui_App  # generate ui_form.py: pyside6-uic form.ui -o ui_form.py
-from validate_hosts import validateHostsFile
+from validateHosts import validateHostsFile
 
 __version__ = "1.1.0"
 
