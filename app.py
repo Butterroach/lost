@@ -21,6 +21,7 @@ import os
 import platform
 import re
 import requests
+import subprocess
 import sys
 from packaging.version import Version
 from PySide6.QtWidgets import (
@@ -36,7 +37,7 @@ from typing import Optional
 from ui_form import Ui_App  # generate ui_form.py: pyside6-uic form.ui -o ui_form.py
 from validateHosts import validateHostsFile
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 
 TIMEOUT = 60
 
@@ -50,10 +51,23 @@ class HtmlWindow(QDialog):
         label = QLabel(self)
         label.setTextFormat(Qt.RichText)
         label.setText(html_content)
-        label.setOpenExternalLinks(True)
+        label.linkActivated.connect(self.openLink)
 
         layout.addWidget(label)
         self.setLayout(layout)
+
+    def openLink(self, link: str):
+        # prevent any issues with opening browsers as root
+        subprocess.Popen(
+            [
+                "sudo",
+                "-u",
+                os.getlogin(),  # this will NOT return root, it will return the actual human user (source: believe me)
+                "python3",
+                "-c",
+                f"__import__('webbrowser').open('{link}')",
+            ]
+        )  # very hacky lol but it works soooo
 
 
 class App(QMainWindow):
