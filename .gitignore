@@ -37,6 +37,8 @@ Thumbs.db
 /.qmake.stash
 .venv/
 # ^ added by butterroach
+.pytest_cache/
+# ^ added by butterroach
 
 # qtcreator generated files
 *.pro.user*
