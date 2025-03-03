@@ -36,7 +36,9 @@ from typing import Optional
 from ui_form import Ui_App  # generate ui_form.py: pyside6-uic form.ui -o ui_form.py
 from validateHosts import validateHostsFile
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
+
+TIMEOUT = 60
 
 
 class HtmlWindow(QDialog):
@@ -118,7 +120,8 @@ class App(QMainWindow):
 
         try:
             release_data = requests.get(
-                "https://api.github.com/repos/Butterroach/lost/releases"
+                "https://api.github.com/repos/Butterroach/lost/releases",
+                timeout=5,
             ).json()
             latest_ver = Version(release_data["tag_name"])
             current_ver = Version(__version__)
@@ -175,7 +178,15 @@ class App(QMainWindow):
         if not QUrl(url).isValid():
             QMessageBox.critical(self, "Invalid URL", "You entered an invalid URL.")
             return
-        contents = requests.get(url).text
+        try:
+            contents = requests.get(url, timeout=TIMEOUT).text
+        except requests.exceptions.Timeout:
+            QMessageBox.critical(
+                self,
+                "Your internet is terrible",
+                "The request to the source URL timed out! Please check your internet connection and try again.",
+            )
+            return
         if not validateHostsFile(contents):
             QMessageBox.critical(
                 self,
@@ -201,7 +212,22 @@ class App(QMainWindow):
 
         for i in range(0, len(self.losts), 2):
             if self.losts[i] == f"# LOST URL {url} 192919291222//././././.":
-                contents = requests.get(url).text
+                try:
+                    contents = requests.get(url, timeout=TIMEOUT).text
+                except requests.exceptions.Timeout:
+                    if notUpdateAll:
+                        QMessageBox.critical(
+                            self,
+                            "Your internet is terrible",
+                            "The update timed out! Please check your internet connection and try again.",
+                        )
+                    else:
+                        QMessageBox.critical(
+                            self,
+                            "Your internet is terrible",
+                            f"The update for {url} timed out! Please check your internet connection and try again.",
+                        )
+                    return
                 if contents.strip().replace("\n", "").replace("\r", "") == self.losts[
                     i + 1
                 ].strip().replace("\n", "").replace("\r", ""):
