@@ -41,7 +41,7 @@ from typing import Optional, List
 from ui_form import Ui_App  # generate ui_form.py: pyside6-uic form.ui -o ui_form.py
 from validateHosts import validateHostsFile
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 
 TIMEOUT = 60
 ALL_EXCEPTIONS = (
