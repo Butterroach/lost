@@ -2,3 +2,4 @@ packaging
 PySide6
 pytest
 requests
+markdown

@@ -6,22 +6,35 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>574</width>
+    <height>466</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Lost</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>logo.png</normaloff>logo.png</iconset>
+  </property>
   <property name="whatsThis">
    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Lost&lt;/span&gt; is a hosts file manager for Linux.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {background-color: rgb(30, 30, 30); }</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QPushButton { background-color: #101010; border-style: solid; border-color: #575757; border-width: 1px; border-radius: 5px; color: white; }</string>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="4" column="0">
+    <item row="5" column="0">
      <layout class="QHBoxLayout" name="lostSpecificActions">
       <item>
        <widget class="QPushButton" name="removeButton">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
         <property name="text">
          <string>Remove</string>
         </property>
@@ -36,26 +49,23 @@
       </item>
      </layout>
     </item>
-    <item row="0" column="0">
-     <widget class="QLineEdit" name="lineEdit">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="placeholderText">
-       <string>URL to the hosts file</string>
-      </property>
-      <property name="clearButtonEnabled">
+    <item row="2" column="0">
+     <widget class="QListView" name="listView">
+      <property name="autoFillBackground">
        <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QListView { background-color: #101010; border-color: #373737; border-width: 1px; border-radius: 11px;}
+QListView::item { color: white; border-bottom: 1px solid white}
+QListView::item:selected { background-color: rgb(130, 255, 130); color: black;}
+</string>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QListView" name="listView"/>
-    </item>
-    <item row="5" column="0">
+    <item row="6" column="0">
      <layout class="QHBoxLayout" name="lostWideActions">
       <item>
        <widget class="QPushButton" name="saveButton">
@@ -73,6 +83,40 @@
       </item>
      </layout>
     </item>
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="hostInput">
+      <item>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {background-color: #101010; color: white; }
+QLineEdit::placeholderText { color: #898989; }</string>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhUrlCharactersOnly</set>
+        </property>
+        <property name="placeholderText">
+         <string>URL to the hosts file</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addButton">
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -80,9 +124,14 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>574</width>
      <height>19</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QMenuBar { background-color: #1e1e1e; }
+QMenuBar::item { color: #ffffff; }
+QMenu, QAction, QMenu::item { background-color: #1a1a1a; color: white; }</string>
    </property>
    <widget class="QMenu" name="menuLost">
     <property name="title">
@@ -91,6 +140,9 @@
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="title">
      <string>Help</string>
     </property>
@@ -99,7 +151,6 @@
    <addaction name="menuLost"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
@@ -108,7 +159,7 @@
     <string>Exit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Alt+E</string>
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionAbout">

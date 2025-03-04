@@ -1,8 +1,6 @@
-<p align="center"><img src="https://raw.githubusercontent.com/Butterroach/lost/refs/heads/master/logo.png" /></p>
+<p align="center"><img src="logo.png" height="256"/></p>
 
 <h1 align="center"><a href="https://github.com/Butterroach/lost">Lost</a></h1>
-
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![CodeQL](https://github.com/Butterroach/lost/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Butterroach/lost/actions/workflows/github-code-scanning/codeql) [![test python](https://github.com/Butterroach/lost/actions/workflows/python-app.yml/badge.svg)](https://github.com/Butterroach/lost/actions/workflows/python-app.yml)
 
 Lost is a lightweight Linux hosts manager made in Python and QT6.
 
